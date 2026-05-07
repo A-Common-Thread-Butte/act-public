@@ -8,12 +8,12 @@ The Sheet stays private to your account. Visitors only ever see the public `/exe
 
 1. In Google Drive, create a new Google Sheet named **Landing Page Signups**.
 2. Rename the first tab to **Signups**.
-3. Add this header row (required — row 1, exactly these four columns in this order):
+3. Add this header row (required — row 1, exactly these eight columns in this order):
 
-   | submitted_at | email | source | user_agent |
-   |--------------|-------|--------|------------|
+   | submitted_at | email | first_name | last_name | business | website | source | user_agent |
+   |--------------|-------|------------|-----------|----------|---------|--------|------------|
 
-   The duplicate-email check reads column B starting at row 2, so the header row must be present.
+   **Column B must be `email`.** The duplicate-email check reads column B by index, so reordering the header will silently break dedup.
 
 4. Leave the Sheet's sharing on the default ("Restricted"). Do not set it to "Anyone with the link."
 
@@ -48,9 +48,9 @@ The Sheet stays private to your account. Visitors only ever see the public `/exe
 ## 5. Test it
 
 1. Open the deployed site.
-2. Submit a test email.
-3. Confirm a row appears in the Sheet within a few seconds.
-4. Submit the same email again. The form should show "You're already on the list — thanks!" and **no** new row should be added (the server treats duplicates as an idempotent success).
+2. Submit a test signup with first name, last name, email, and (optionally) business and website.
+3. Confirm a row appears in the Sheet within a few seconds with all the fields populated. Optional fields left blank should appear as empty cells.
+4. Submit the same email again with different names. The form should show "You're already on the list — thanks!" and **no** new row should be added (the server treats duplicates as an idempotent success — the original row's fields are not updated).
 
 ## Updating the script later
 

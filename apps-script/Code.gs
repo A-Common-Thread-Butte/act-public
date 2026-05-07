@@ -11,11 +11,19 @@ function doPost(e) {
   try {
     const params = (e && e.parameter) || {};
     const email = String(params.email || "").trim();
+    const firstName = String(params.first_name || "").trim().slice(0, 100);
+    const lastName = String(params.last_name || "").trim().slice(0, 100);
+    const business = String(params.business || "").trim().slice(0, 200);
+    const website = String(params.website || "").trim().slice(0, 500);
     const source = String(params.source || "landing").trim().slice(0, 64);
     const userAgent = String(params.user_agent || "").slice(0, 500);
 
     if (!EMAIL_RE.test(email)) {
       return json({ ok: false, error: "invalid_email" });
+    }
+
+    if (!firstName || !lastName) {
+      return json({ ok: false, error: "missing_name" });
     }
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -33,7 +41,16 @@ function doPost(e) {
       }
     }
 
-    sheet.appendRow([new Date().toISOString(), email, source, userAgent]);
+    sheet.appendRow([
+      new Date().toISOString(), // A submitted_at
+      email,                    // B email   (column B is required for the dedup check above)
+      firstName,                // C first_name
+      lastName,                 // D last_name
+      business,                 // E business
+      website,                  // F website
+      source,                   // G source
+      userAgent,                // H user_agent
+    ]);
     return json({ ok: true });
   } catch (err) {
     return json({ ok: false, error: "server_error" });

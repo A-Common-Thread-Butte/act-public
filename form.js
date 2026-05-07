@@ -10,7 +10,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const form = document.getElementById("signup");
   if (!form) return;
 
-  const input = form.querySelector('input[name="email"]');
+  const firstNameInput = form.querySelector('input[name="first_name"]');
+  const lastNameInput = form.querySelector('input[name="last_name"]');
+  const emailInput = form.querySelector('input[name="email"]');
+  const businessInput = form.querySelector('input[name="business"]');
+  const websiteInput = form.querySelector('input[name="website"]');
   const button = form.querySelector('button[type="submit"]');
   const status = document.getElementById("signup-status");
 
@@ -19,13 +23,34 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     status.textContent = message;
   }
 
+  function normalizeWebsite(value) {
+    if (!value) return "";
+    return /^https?:\/\//i.test(value) ? value : `https://${value}`;
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const email = (input.value || "").trim();
+    const firstName = (firstNameInput.value || "").trim();
+    const lastName = (lastNameInput.value || "").trim();
+    const email = (emailInput.value || "").trim();
+    const business = (businessInput.value || "").trim();
+    const website = normalizeWebsite((websiteInput.value || "").trim());
+
+    if (!firstName) {
+      setStatus("error", "Please add your first name.");
+      firstNameInput.focus();
+      return;
+    }
+
+    if (!lastName) {
+      setStatus("error", "Please add your last name.");
+      lastNameInput.focus();
+      return;
+    }
 
     if (!EMAIL_RE.test(email)) {
       setStatus("error", "That email doesn't look right. Mind checking it?");
-      input.focus();
+      emailInput.focus();
       return;
     }
 
@@ -38,7 +63,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setStatus("", "Sending…");
 
     const body = new URLSearchParams({
+      first_name: firstName,
+      last_name: lastName,
       email,
+      business,
+      website,
       source: "landing",
       user_agent: navigator.userAgent || "",
     });
