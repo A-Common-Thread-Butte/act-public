@@ -76,13 +76,19 @@ body {
   max-width: 32rem;
 }
 
+.signup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .signup__row {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
 }
 
-.signup input[type="email"] {
+.signup__field {
   flex: 1 1 14rem;
   min-width: 0;
   font: inherit;
@@ -93,9 +99,13 @@ body {
   padding: 0.7rem 0.85rem;
 }
 
-.signup input[type="email"]::placeholder { color: var(--ink-muted); }
+.signup__row--name .signup__field {
+  flex: 1 1 12rem;
+}
 
-.signup input[type="email"]:focus-visible,
+.signup__field::placeholder { color: var(--ink-muted); }
+
+.signup__field:focus-visible,
 .signup button:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
