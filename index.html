@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A Common Thread</title>
+  <meta name="description" content="A Common Thread helps small businesses across Southwest Montana grow the connection to their community." />
+  <meta name="color-scheme" content="light" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="page">
+    <p class="wordmark">A Common Thread</p>
+    <h1 class="headline">Grow the connection to your community.</h1>
+    <p class="lede">We help small businesses across Southwest Montana show up where their community is already looking. Launching soon &mdash; leave your email and we&rsquo;ll be in touch.</p>
+
+    <form id="signup" class="signup" novalidate>
+      <label class="visually-hidden" for="email">Email address</label>
+      <div class="signup__row">
+        <input
+          id="email"
+          name="email"
+          type="email"
+          inputmode="email"
+          autocomplete="email"
+          placeholder="you@example.com"
+          required
+        />
+        <button type="submit">Notify me</button>
+      </div>
+      <p id="signup-status" class="signup__status" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+
+  <footer class="footer">Butte, MT &middot; <span id="year">2026</span></footer>
+
+  <script src="/form.js" defer></script>
+</body>
+</html>
