@@ -1,5 +1,5 @@
 // Paste the Apps Script /exec URL here after deploying (see apps-script/SETUP.md).
-const FORM_ENDPOINT = "REPLACE_WITH_APPS_SCRIPT_EXEC_URL";
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycby8ql6nhlFDtke9lkEdAzdTHoobrFmk38x5ugeOb4AbNO2DYpkb3RczsGWv4ImPNWu4/exec";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -53,7 +53,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       const done = document.createElement("p");
       done.className = "signup--done";
-      done.textContent = "Thanks. We’ll be in touch when we launch.";
+      done.textContent = data.status === "already_subscribed"
+        ? "You’re already on the list — thanks!"
+        : "Thanks. We’ll be in touch when we launch.";
       form.replaceWith(done);
     } catch (err) {
       button.disabled = false;

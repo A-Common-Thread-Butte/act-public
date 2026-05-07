@@ -22,6 +22,17 @@ function doPost(e) {
     let sheet = ss.getSheetByName(SHEET_NAME);
     if (!sheet) sheet = ss.getSheets()[0];
 
+    const emailLower = email.toLowerCase();
+    const lastRow = sheet.getLastRow();
+    if (lastRow > 1) {
+      const existing = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+      for (let i = 0; i < existing.length; i++) {
+        if (String(existing[i][0]).trim().toLowerCase() === emailLower) {
+          return json({ ok: true, status: "already_subscribed" });
+        }
+      }
+    }
+
     sheet.appendRow([new Date().toISOString(), email, source, userAgent]);
     return json({ ok: true });
   } catch (err) {
