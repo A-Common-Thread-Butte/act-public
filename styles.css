@@ -81,15 +81,6 @@ body {
   width: 100%;
 }
 
-.form-section__heading {
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  margin: 0 0 1rem;
-}
-
 .form-section__iframe {
   display: block;
   width: 100%;
