@@ -22,7 +22,7 @@ If the project isn't yet linked to Vercel:
 2. Enter the domain. Follow the DNS instructions Vercel shows (an `A` record or `CNAME` depending on whether it's the apex or a subdomain).
 3. Once DNS propagates, Vercel issues a TLS cert automatically.
 
-No environment variables are needed for v1 — the Apps Script `/exec` URL lives directly in `form.js`.
+No environment variables are needed — the Airtable form embed URL lives directly in `index.html` (the `<iframe>` inside `<section class="form-section">`).
 
 ## Rolling back
 
@@ -38,5 +38,5 @@ That swaps production back to the older build instantly. No redeploy needed.
 
 - Page loads at the Vercel URL.
 - Headline and form render on mobile and desktop without scrolling on a typical viewport.
-- Submitting a real email lands a row in the **Landing Page Signups** sheet (see `apps-script/SETUP.md`).
-- DevTools → Network shows no third-party requests (everything served from the same origin).
+- Submitting a real email lands a row in the connected Airtable base.
+- DevTools → Network shows no third-party requests beyond the Airtable iframe and Vercel Analytics.
