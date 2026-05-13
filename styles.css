@@ -116,15 +116,16 @@ body {
 .signup button {
   font: inherit;
   font-weight: 500;
-  color: var(--bg);
-  background: var(--ink);
-  border: 1px solid var(--ink);
+  color: #FAF0E6;
+  background: #B7472A;
+  border: 1px solid #B7472A;
   border-radius: 0;
   padding: 0.7rem 1.25rem;
   cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 }
 
-.signup button:hover { background: #000; }
+.signup button:hover { background: #9C3D24; border-color: #9C3D24; }
 .signup button[disabled] { opacity: 0.6; cursor: progress; }
 
 .signup__status {
