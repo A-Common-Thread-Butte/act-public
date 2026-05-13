@@ -1,4 +1,5 @@
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xykoakbz";
 
 (function () {
   const yearEl = document.getElementById("year");
@@ -11,6 +12,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const lastNameInput = form.querySelector('input[name="last_name"]');
   const emailInput = form.querySelector('input[name="email"]');
   const websiteInput = form.querySelector('input[name="website"]');
+  const submitBtn = form.querySelector('button[type="submit"]');
   const status = document.getElementById("signup-status");
 
   function setStatus(state, message) {
@@ -23,13 +25,19 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return /^https?:\/\//i.test(value) ? value : `https://${value}`;
   }
 
-  form.addEventListener("submit", (e) => {
+  function showDone() {
+    const done = document.createElement("p");
+    done.className = "signup--done";
+    done.textContent = "Thanks. We’ll be in touch when we launch.";
+    form.replaceWith(done);
+  }
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const firstName = (firstNameInput.value || "").trim();
     const lastName = (lastNameInput.value || "").trim();
     const email = (emailInput.value || "").trim();
-    // website is normalized for the future backend; currently unused.
-    normalizeWebsite((websiteInput.value || "").trim());
+    const website = normalizeWebsite((websiteInput.value || "").trim());
 
     if (!firstName) {
       setStatus("error", "Please add your first name.");
@@ -49,12 +57,33 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return;
     }
 
-    // TODO: send the form data to the new data-collection backend here.
-    // The signup is currently a no-op — we only show the thank-you state.
+    submitBtn.disabled = true;
+    setStatus("", "Sending…");
 
-    const done = document.createElement("p");
-    done.className = "signup--done";
-    done.textContent = "Thanks. We’ll be in touch when we launch.";
-    form.replaceWith(done);
+    const formData = new FormData(form);
+    if (website) formData.set("website", website);
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+
+      if (response.ok) {
+        showDone();
+        return;
+      }
+
+      const data = await response.json().catch(() => null);
+      const message =
+        (data && Array.isArray(data.errors) && data.errors[0] && data.errors[0].message) ||
+        "Something went wrong. Please try again.";
+      setStatus("error", message);
+      submitBtn.disabled = false;
+    } catch (_err) {
+      setStatus("error", "Couldn't connect. Please try again in a moment.");
+      submitBtn.disabled = false;
+    }
   });
 })();
