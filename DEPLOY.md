@@ -22,7 +22,7 @@ If the project isn't yet linked to Vercel:
 2. Enter the domain. Follow the DNS instructions Vercel shows (an `A` record or `CNAME` depending on whether it's the apex or a subdomain).
 3. Once DNS propagates, Vercel issues a TLS cert automatically.
 
-No environment variables are needed for v1 — the Apps Script `/exec` URL lives directly in `form.js`.
+No environment variables are needed today. The signup form is currently a no-op while the data-collection backend is being chosen — once it's wired up, any keys it needs should be set as Vercel environment variables, not committed to the repo.
 
 ## Rolling back
 
@@ -38,5 +38,5 @@ That swaps production back to the older build instantly. No redeploy needed.
 
 - Page loads at the Vercel URL.
 - Headline and form render on mobile and desktop without scrolling on a typical viewport.
-- Submitting a real email lands a row in the **Landing Page Signups** sheet (see `apps-script/SETUP.md`).
+- Submitting a valid email replaces the form with the "Thanks. We'll be in touch when we launch." line. (The form is a no-op until the new data-collection backend is wired in.)
 - DevTools → Network shows no third-party requests (everything served from the same origin).
