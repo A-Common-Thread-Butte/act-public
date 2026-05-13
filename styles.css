@@ -163,8 +163,23 @@ body {
 }
 
 .packages {
-  margin: 0 0 clamp(1.75rem, 5vh, 2.5rem);
+  margin: clamp(0.75rem, 2vh, 1.25rem) 0 clamp(1.75rem, 5vh, 2.5rem);
   border-top: 1px solid var(--rule-strong);
+}
+
+.contact {
+  margin-top: clamp(0.75rem, 2vh, 1.25rem);
+  border-top: 1px solid var(--rule-strong);
+}
+
+.contact__heading {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: clamp(1.25rem, 4vh, 1.75rem) 0 1rem;
 }
 
 .packages__heading {
