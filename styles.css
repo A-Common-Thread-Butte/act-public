@@ -164,21 +164,8 @@ body {
 }
 
 .packages,
-.includes,
 .contact {
   padding-top: clamp(5.5rem, 12vw, 9rem);
-}
-
-.chapter-numeral {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-style: normal;
-  font-size: clamp(2.25rem, 5vw, 3rem);
-  line-height: 1;
-  letter-spacing: normal;
-  color: #3B1F0E;
-  opacity: 0.6;
-  margin: 0 0 1rem;
 }
 
 .chapter-heading {
@@ -305,6 +292,27 @@ body {
 .package__detail-text {
   margin: 0;
   color: var(--ink-muted);
+}
+
+.includes {
+  margin-top: 3rem;
+}
+
+.includes__heading {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #3B1F0E;
+  margin: 0 0 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .includes__heading {
+    font-size: 1.375rem;
+  }
 }
 
 .includes .package__detail + .package__detail {
