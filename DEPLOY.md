@@ -38,5 +38,5 @@ That swaps production back to the older build instantly. No redeploy needed.
 
 - Page loads at the Vercel URL.
 - Headline and form render on mobile and desktop without scrolling on a typical viewport.
-- Submitting a valid email replaces the form with the "Thanks. We'll be in touch when we launch." line. (The form is a no-op until the new data-collection backend is wired in.)
+- Submitting a valid email replaces the form with the "You're on the list — welcome aboard!" line.
 - DevTools → Network shows no third-party requests (everything served from the same origin).

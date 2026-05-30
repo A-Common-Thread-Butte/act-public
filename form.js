@@ -28,7 +28,7 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/xykoakbz";
   function showDone() {
     const done = document.createElement("p");
     done.className = "signup--done";
-    done.textContent = "Thanks. We’ll be in touch when we launch.";
+    done.textContent = "You’re on the list — welcome aboard!";
     form.replaceWith(done);
   }
 
