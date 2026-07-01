@@ -209,12 +209,6 @@ body {
   line-height: 1.2;
 }
 
-.package__price {
-  font-size: 0.9rem;
-  color: var(--ink-muted);
-  white-space: nowrap;
-}
-
 .package__indicator {
   position: relative;
   flex: 0 0 14px;
