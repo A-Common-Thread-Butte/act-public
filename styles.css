@@ -28,6 +28,8 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 html, body { margin: 0; padding: 0; }
 
 body {
@@ -59,8 +61,17 @@ body {
   font-weight: 500;
   font-size: 0.95rem;
   letter-spacing: 0.04em;
-  margin: 0 0 clamp(1.5rem, 6vh, 3rem);
+  margin: 0 0 0.75rem;
   color: var(--ink-muted);
+}
+
+.eyebrow {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  margin: 0 0 clamp(1.5rem, 6vh, 3rem);
 }
 
 .headline {
@@ -108,12 +119,13 @@ body {
 .signup__field::placeholder { color: var(--ink-muted); }
 
 .signup__field:focus-visible,
-.signup button:focus-visible {
+.button:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 
-.signup button {
+.button {
+  display: inline-block;
   font: inherit;
   font-weight: 500;
   color: #FAF0E6;
@@ -122,11 +134,12 @@ body {
   border-radius: 0;
   padding: 0.7rem 1.25rem;
   cursor: pointer;
+  text-decoration: none;
   transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 }
 
-.signup button:hover { background: #9C3D24; border-color: #9C3D24; }
-.signup button[disabled] { opacity: 0.6; cursor: progress; }
+.button:hover { background: #9C3D24; border-color: #9C3D24; }
+.button[disabled] { opacity: 0.6; cursor: progress; }
 
 .signup__status {
   margin: 0.75rem 0 0;
@@ -151,6 +164,23 @@ body {
   padding-top: 1.5rem;
 }
 
+.footer p { margin: 0; }
+.footer p + p { margin-top: 0.5rem; }
+
+.footer a {
+  color: inherit;
+}
+
+.footer a:hover,
+.footer a:focus-visible {
+  color: var(--ink);
+}
+
+.footer a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -163,8 +193,7 @@ body {
   border: 0;
 }
 
-.services,
-.contact {
+.section {
   padding-top: clamp(5.5rem, 12vw, 9rem);
 }
 
@@ -177,6 +206,12 @@ body {
   letter-spacing: normal;
   color: #3B1F0E;
   margin: 0 0 clamp(1.5rem, 4vw, 2rem);
+}
+
+.section__text {
+  margin: 0 0 1.25rem;
+  color: var(--ink-muted);
+  max-width: 32rem;
 }
 
 .service {
@@ -196,4 +231,47 @@ body {
 .service__text {
   margin: 0;
   color: var(--ink-muted);
+}
+
+.services__group-intro {
+  font-style: italic;
+  margin: 0 0 1rem;
+  color: var(--ink-muted);
+}
+
+.services__secondary {
+  margin-top: 1.25rem;
+}
+
+.services__secondary-item + .services__secondary-item {
+  margin-top: 1.25rem;
+}
+
+.services__secondary-text {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.testimonial__quote {
+  margin: 0 0 1rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.testimonial__quote p {
+  margin: 0;
+}
+
+.testimonial__attribution {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+textarea.signup__field {
+  resize: vertical;
+  font-family: inherit;
 }
